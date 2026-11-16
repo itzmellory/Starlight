@@ -20,9 +20,11 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
+      - uses: android-actions/setup-android@v3
+      - run: echo "y" | sdkmanager "build-tools;34.0.0" "platforms;android-34"
       - uses: gradle/actions/setup-gradle@v4
       - run: chmod +x ./gradlew
-      - run: ./gradlew clean jar
+      - run: ./gradlew clean deploy
       - id: version
         run: |
           git fetch --tags
@@ -38,7 +40,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create "${{ steps.version.outputs.version }}" \
-            build/libs/*.jar \
+            build/libs/Starlight.jar \
             --target "${{ github.sha }}" \
             --title "Starlight ${{ steps.version.outputs.version }}" \
             --generate-notes
