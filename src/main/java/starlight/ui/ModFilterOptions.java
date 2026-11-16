@@ -7,6 +7,7 @@ import arc.func.Cons;
 import arc.func.Floatc;
 import arc.func.Floatp;
 import arc.func.Prov;
+import arc.scene.ui.CheckBox;
 import arc.scene.ui.Image;
 import arc.scene.ui.Label;
 import arc.scene.ui.layout.Table;
@@ -43,14 +44,18 @@ public class ModFilterOptions {
          this.step = st;
       }
       public void build(Table table) {
-         table.add("@filter.option." + this.name).growX().left().style(Styles.outlineLabel);
-         Label val = (Label)table.label(() -> Strings.autoFixed(this.getter.get(), 2)).right().style(Styles.outlineLabel).get();
+         Label nameLbl = table.add("@filter.option." + this.name).growX().minWidth(0.0F).left().style(Styles.outlineLabel).get();
+         nameLbl.setWrap(true);
+         nameLbl.setEllipsis(true);
+         Label val = table.label(() -> Strings.autoFixed(this.getter.get(), 2)).right().padLeft(4.0F).style(Styles.outlineLabel).get();
          table.row();
          table.slider(this.min, this.max, this.step, this.getter.get(), (f) -> {
             this.setter.get(f);
             val.setText(Strings.autoFixed(f, 2));
-            this.changed.run();
-         }).colspan(2).growX().row();
+            if (this.changed != null) {
+               this.changed.run();
+            }
+         }).colspan(2).growX().minWidth(0.0F).row();
       }
    }
    public static class ToggleOption extends FilterOption {
@@ -63,10 +68,16 @@ public class ModFilterOptions {
          this.setter = s;
       }
       public void build(Table table) {
-         table.check("@filter.option." + this.name, this.getter.get(), (b) -> {
+         CheckBox box = table.check("@filter.option." + this.name, this.getter.get(), (b) -> {
             this.setter.get(b);
-            this.changed.run();
-         }).colspan(2).growX().left().padTop(4.0F).padBottom(4.0F).row();
+            if (this.changed != null) {
+               this.changed.run();
+            }
+         }).colspan(2).growX().minWidth(0.0F).left().padTop(4.0F).padBottom(4.0F).get();
+         box.getLabel().setWrap(true);
+         box.getLabel().setEllipsis(true);
+         box.getLabelCell().growX().minWidth(0.0F);
+         table.row();
       }
    }
    public static class BlockOption extends FilterOption {
@@ -90,7 +101,9 @@ public class ModFilterOptions {
                      ((Image)t.image(block.uiIcon).size(32.0F).pad(3.0F).tooltip(block == Blocks.air ? "Any Floor" : block.localizedName).get()).clicked(() -> {
                         this.consumer.get(block);
                         dialog.hide();
-                        this.changed.run();
+                        if (this.changed != null) {
+                           this.changed.run();
+                        }
                      });
                      ++i;
                      if (i % 10 == 0) {
@@ -102,7 +115,10 @@ public class ModFilterOptions {
             dialog.addCloseButton();
             dialog.show();
          }).pad(4.0F).margin(8.0F);
-         table.add("@filter.option." + this.name).left().growX().style(Styles.outlineLabel).row();
+         Label lbl = table.add("@filter.option." + this.name).left().growX().minWidth(0.0F).style(Styles.outlineLabel).get();
+         lbl.setWrap(true);
+         lbl.setEllipsis(true);
+         table.row();
       }
    }
 }
