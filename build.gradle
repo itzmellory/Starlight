@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+group = 'starlight'
+version = '1.0'
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+dependencies {
+    compileOnly "com.github.Anuken.Mindustry:core:${mindustryVersion}"
+}
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 17
+}
+
+jar {
+    archiveBaseName = 'Starlight'
+    from('assets') {
+        into ''
+    }
+    from('mod.hjson')
+    from('icon.png')
+}
