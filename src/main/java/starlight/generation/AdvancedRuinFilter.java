@@ -806,6 +806,7 @@ public class AdvancedRuinFilter extends GenerateFilter {
                this.f.steps = AdvancedRuinFilter.RuinStep.defaults();
             }
             for(int idx = 0; idx < this.f.steps.length; ++idx) {
+               int i = idx;
                RuinStep st = this.f.steps[idx];
                Table row = new Table(Tex.button);
                row.margin(6.0F);
@@ -845,7 +846,7 @@ public class AdvancedRuinFilter extends GenerateFilter {
                row.add(rl).width(30.0F);
                row.button(Icon.trash, Styles.flati, () -> {
                   ArrayList<RuinStep> l = new ArrayList(Arrays.asList(this.f.steps));
-                  l.remove(idx);
+                  l.remove(i);
                   this.f.steps = (RuinStep[])l.toArray(new RuinStep[0]);
                   rebuild[0].run();
                   if (this.changed != null) {
