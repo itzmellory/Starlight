@@ -25,10 +25,10 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
       - run: chmod +x ./gradlew
       - run: ./gradlew clean deploy
-      - name: Package assets
+      - name: Verify bundles
         run: |
-          mkdir -p build/libs
-          zip -r build/libs/Starlight-assets.zip assets
+          test -d src/resources/bundles
+          jar tf build/libs/Starlight.jar | grep -q '^bundles/bundle.properties$'
       - id: version
         run: |
           git fetch --tags
@@ -45,7 +45,6 @@ jobs:
         run: |
           gh release create "${{ steps.version.outputs.version }}" \
             build/libs/Starlight.jar \
-            build/libs/Starlight-assets.zip \
             --target "${{ github.sha }}" \
             --title "Starlight ${{ steps.version.outputs.version }}" \
             --generate-notes
