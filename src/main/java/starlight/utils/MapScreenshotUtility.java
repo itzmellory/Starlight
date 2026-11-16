@@ -1,7 +1,6 @@
 package starlight.utils;
 import arc.Core;
 import arc.files.Fi;
-import arc.graphics.Color;
 import arc.graphics.Pixmap;
 import arc.graphics.PixmapIO;
 import arc.graphics.g2d.Draw;
@@ -101,6 +100,18 @@ public class MapScreenshotUtility {
       Draw.color();
       Draw.reset();
    }
+   private static int rgba(int r, int g, int b, int a) {
+      return (r & 255) << 24 | (g & 255) << 16 | (b & 255) << 8 | (a & 255);
+   }
+   private static void fillRect(Pixmap image, int x, int y, int width, int height, int color) {
+      int maxX = Math.min(image.getWidth(), x + width);
+      int maxY = Math.min(image.getHeight(), y + height);
+      for (int py = Math.max(0, y); py < maxY; py++) {
+         for (int px = Math.max(0, x); px < maxX; px++) {
+            image.set(px, py, color);
+         }
+      }
+   }
    private static void addScreenshotMark(Pixmap image) {
       int margin = 10;
       int x = margin;
@@ -108,10 +119,8 @@ public class MapScreenshotUtility {
       int scale = Math.max(2, Math.min(5, image.getWidth() / 300));
       int badgeWidth = 100 * scale;
       int badgeHeight = 15 * scale;
-      image.setColor(new Color(0.04f, 0.05f, 0.07f, 0.88f));
-      image.fillRectangle(x, y, badgeWidth, badgeHeight);
-      image.setColor(new Color(0.25f, 0.85f, 1f, 1f));
-      image.fillRectangle(x, y + badgeHeight - Math.max(2, scale), badgeWidth, Math.max(2, scale));
+      fillRect(image, x, y, badgeWidth, badgeHeight, rgba(10, 13, 18, 225));
+      fillRect(image, x, y + badgeHeight - Math.max(2, scale), badgeWidth, Math.max(2, scale), rgba(64, 217, 255, 255));
       drawBitmapText(image, "STARLIGHT MAP", x + 5 * scale, y + 5 * scale, scale);
    }
    private static void drawBitmapText(Pixmap image, String text, int startX, int startY, int scale) {
@@ -153,7 +162,7 @@ public class MapScreenshotUtility {
          String glyph = glyphs[index];
          for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 3; col++) {
-               if (glyph.charAt(row * 3 + col) == '1') image.fillRectangle(cursor + col * scale, startY + (4 - row) * scale, scale, scale);
+               if (glyph.charAt(row * 3 + col) == '1') fillRect(image, cursor + col * scale, startY + (4 - row) * scale, scale, scale, rgba(255, 255, 255, 255));
             }
          }
          cursor += 4 * scale;
