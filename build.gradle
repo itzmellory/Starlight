@@ -1,27 +1,37 @@
 plugins {
     id 'java'
 }
+
 group = 'starlight'
 version = '1.0'
+
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
 }
+
 dependencies {
     compileOnly "com.github.Anuken.Mindustry:core:${mindustryVersion}"
 }
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
 }
+
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-    options.release = 17
+    options.release = 8
 }
 
 jar {
     archiveBaseName = 'Starlight'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from('assets') {
+        into 'assets'
+    }
     from('assets') {
         into ''
     }
