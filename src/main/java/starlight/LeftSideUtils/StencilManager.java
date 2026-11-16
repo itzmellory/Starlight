@@ -270,11 +270,12 @@ public class StencilManager {
    }
    public static void showDialog() {
       BaseDialog d = new BaseDialog(Core.bundle.get("editor.stencil.title", "Stencil Setup"));
-      Table t = new Table();
+      Table t = new Table(Tex.pane);
+      t.margin(12.0F);
       Runnable[] rebuild = new Runnable[1];
       rebuild[0] = () -> {
          t.clearChildren();
-         t.defaults().pad(4.0F).left();
+         t.defaults().pad(6.0F).left();
          if (targetW <= 0) {
             targetW = Vars.editor.width();
          }
@@ -285,7 +286,7 @@ public class StencilManager {
             Table prevBox = new Table(Tex.pane);
             Image img = new Image(new TextureRegionDrawable(region));
             img.setScaling(Scaling.fit);
-            prevBox.add(img).size(160.0F, 160.0F).pad(4.0F);
+            prevBox.add(img).size(190.0F, 190.0F).pad(6.0F);
             t.add(prevBox).colspan(2).center().padBottom(6.0F).row();
          }
          t.add(Core.bundle.get("editor.stencil.width", "Width (tiles):"));
@@ -294,7 +295,7 @@ public class StencilManager {
             if (currentFile != null) {
                loadStencil(currentFile, targetW, targetH);
             }
-         }).width(140.0F).get();
+         }).width(160.0F).height(38.0F).get();
          t.row();
          t.add(Core.bundle.get("editor.stencil.height", "Height (tiles):"));
          TextField hf = (TextField)t.field(String.valueOf(targetH), TextFieldFilter.digitsOnly, (s) -> {
@@ -302,7 +303,7 @@ public class StencilManager {
             if (currentFile != null) {
                loadStencil(currentFile, targetW, targetH);
             }
-         }).width(140.0F).get();
+         }).width(160.0F).height(38.0F).get();
          t.row();
          t.button(Core.bundle.get("editor.stencil.fitmap", "Fit Map Size"), Styles.flatt, () -> {
             targetW = Vars.editor.width();
@@ -312,25 +313,25 @@ public class StencilManager {
             if (currentFile != null) {
                loadStencil(currentFile, targetW, targetH);
             }
-         }).colspan(2).growX().height(36.0F).row();
+         }).colspan(2).growX().height(46.0F).row();
          t.button(Core.bundle.get("editor.stencil.selectpng", "Select PNG..."), Icon.fileImage, Styles.flatt, () -> pickPNG((file) -> Core.app.post(() -> {
                   loadStencil(file, targetW, targetH);
                   rebuild[0].run();
-               }))).colspan(2).growX().height(42.0F).row();
+               }))).colspan(2).growX().height(46.0F).row();
          t.add(Core.bundle.get("editor.stencil.opacity", "Opacity:"));
-         t.slider(0.05F, 1.0F, 0.05F, opacity, (v) -> opacity = v).width(160.0F).row();
+         t.slider(0.05F, 1.0F, 0.05F, opacity, (v) -> opacity = v).width(180.0F).row();
          t.add(Core.bundle.get("editor.stencil.offsetx", "Offset X:"));
-         TextField oxf = (TextField)t.field(Strings.fixed(offsetX, 0), (s) -> offsetX = Strings.parseFloat(s, offsetX)).width(140.0F).get();
+         TextField oxf = (TextField)t.field(Strings.fixed(offsetX, 0), (s) -> offsetX = Strings.parseFloat(s, offsetX)).width(160.0F).height(38.0F).get();
          t.row();
          t.add(Core.bundle.get("editor.stencil.offsety", "Offset Y:"));
-         TextField oyf = (TextField)t.field(Strings.fixed(offsetY, 0), (s) -> offsetY = Strings.parseFloat(s, offsetY)).width(140.0F).get();
+         TextField oyf = (TextField)t.field(Strings.fixed(offsetY, 0), (s) -> offsetY = Strings.parseFloat(s, offsetY)).width(160.0F).height(38.0F).get();
          t.row();
          t.button(Core.bundle.get("editor.stencil.center", "Center on Map"), Styles.flatt, () -> {
             offsetX = (float)(Vars.editor.width() - targetW) / 2.0F;
             offsetY = (float)(Vars.editor.height() - targetH) / 2.0F;
             oxf.setText(Strings.fixed(offsetX, 0));
             oyf.setText(Strings.fixed(offsetY, 0));
-         }).colspan(2).growX().height(36.0F).row();
+         }).colspan(2).growX().height(46.0F).row();
          t.check(Core.bundle.get("editor.stencil.enable", "Show Stencil"), enabled, (v) -> enabled = v).colspan(2).left().row();
          t.check(Core.bundle.get("editor.stencil.movemode", "Drag / Move Mode"), moveMode, StencilManager::setMoveMode).colspan(2).left().row();
          t.button(Core.bundle.get("editor.stencil.clear", "Clear Stencil"), Icon.trash, Styles.flatt, () -> {
@@ -342,11 +343,11 @@ public class StencilManager {
             currentFile = null;
             setMoveMode(false);
             rebuild[0].run();
-         }).colspan(2).growX().height(38.0F).padTop(6.0F).row();
+         }).colspan(2).growX().height(42.0F).padTop(8.0F).row();
       };
       rebuild[0].run();
       d.cont.pane(t).maxHeight((float)Core.graphics.getHeight() * 0.82F);
       d.addCloseButton();
       d.show();
    }
-                       }
+}
