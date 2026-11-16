@@ -339,11 +339,11 @@ public class LandCopyPast {
          pasteActionBar.setFillParent(true);
          pasteActionBar.bottom();
          pasteActionBar.touchable = Touchable.childrenOnly;
-         Table box = new Table(Tex.button);
-         box.margin(4.0F);
-         box.defaults().height(42.0F).pad(3.0F);
-         box.button(Core.bundle.get("upper.apply", "Paste Here"), Icon.ok, Styles.flatt, () -> pasteAt(pasteOriginX, pasteOriginY)).width(150.0F);
-         box.button(Core.bundle.get("upper.cancel", "Cancel"), Icon.cancel, Styles.flatt, () -> setMode(LandCopyPast.Mode.none)).width(120.0F);
+         Table box = new Table(Tex.pane);
+         box.margin(7.0F);
+         box.defaults().height(46.0F).pad(4.0F);
+         box.button(Core.bundle.get("upper.apply", "Paste Here"), Icon.ok, Styles.flatt, () -> pasteAt(pasteOriginX, pasteOriginY)).width(170.0F);
+         box.button(Core.bundle.get("upper.cancel", "Cancel"), Icon.cancel, Styles.flatt, () -> setMode(LandCopyPast.Mode.none)).width(140.0F);
          pasteActionBar.add(box).padBottom(12.0F);
          parent.addChild(pasteActionBar);
       }
@@ -827,13 +827,14 @@ public class LandCopyPast {
    }
    public static void showCopyPasteSettings() {
       BaseDialog d = new BaseDialog(Core.bundle.get("upper.settings", "Copy / Paste Options"));
-      Table t = new Table();
-      t.defaults().left().pad(4.0F);
-      t.add("[accent]Copy Layers[]").row();
+      Table t = new Table(Tex.pane);
+      t.margin(12.0F);
+      t.defaults().left().pad(7.0F);
+      t.add("[accent]▸ Copy Layers[]").padBottom(4.0F).row();
       t.check("Copy Floor", copyFloor, (v) -> copyFloor = v).row();
       t.check("Copy Ore / Overlay", copyOre, (v) -> copyOre = v).row();
       t.check("Copy Blocks / Walls", copyBlock, (v) -> copyBlock = v).row();
-      t.add("[accent]Paste Rules[]").padTop(8.0F).row();
+      t.add("[accent]▸ Paste Rules[]").padTop(12.0F).padBottom(4.0F).row();
       t.check("Override Existing Blocks", overrideBlock, (v) -> overrideBlock = v).row();
       t.check("Override Existing Ores", overrideOre, (v) -> overrideOre = v).row();
       t.check("Use Active Editor Team", useEditorTeam, (v) -> useEditorTeam = v).row();
@@ -963,4 +964,4 @@ public class LandCopyPast {
          }
       }
    }
-      }
+                            }
