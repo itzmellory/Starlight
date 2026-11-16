@@ -62,9 +62,6 @@ jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
     from('assets') {
-        into 'assets'
-    }
-    from('assets') {
         into ''
     }
     from('mod.hjson')
