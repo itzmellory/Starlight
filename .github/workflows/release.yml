@@ -27,8 +27,11 @@ jobs:
       - run: ./gradlew clean deploy
       - name: Verify bundles
         run: |
-          test -d src/resources/bundles
-          jar tf build/libs/Starlight.jar | grep -q '^bundles/bundle.properties$'
+          test -d src/main/java/starlight/resources/bundles
+          jar tf build/libs/Starlight.jar > build/libs/jar-contents.txt
+          grep -q '^bundles/bundle.properties$' build/libs/jar-contents.txt
+          grep -q '^bundles/bundle_ru.properties$' build/libs/jar-contents.txt
+          grep -q '^bundles/bundle_zh.properties$' build/libs/jar-contents.txt
       - id: version
         run: |
           git fetch --tags
