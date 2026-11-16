@@ -64,10 +64,10 @@ public class GeneratorUI {
       } else {
          wrapper.add(first).padRight(15.0F).top();
       }
-      Table customPanel = new Table(Tex.button);
-      customPanel.margin(14.0F);
-      customPanel.defaults().size(230.0F, 45.0F).pad(3.0F).left();
-      customPanel.add("[accent]Advanced Redactor[]").height(28.0F).padBottom(6.0F).left().row();
+      Table customPanel = new Table(Tex.pane);
+      customPanel.margin(12.0F);
+      customPanel.defaults().size(238.0F, 48.0F).pad(4.0F).left();
+      customPanel.add("[accent]✦ Advanced Redactor[]").height(32.0F).padBottom(8.0F).left().row();
       addFilterButton(customPanel, addDialog, new AdvancedTerrainFilter());
       addFilterButton(customPanel, addDialog, new AdvancedWaterFilter());
       addFilterButton(customPanel, addDialog, new AdvancedRuinFilter());
@@ -79,7 +79,7 @@ public class GeneratorUI {
    }
    private static void addFilterButton(Table parent, BaseDialog addDialog, GenerateFilter filterTemplate) {
       parent.button((b) -> {
-         b.left().marginLeft(10.0F);
+         b.left().marginLeft(12.0F).marginRight(8.0F);
          b.add(String.valueOf(filterTemplate.icon())).padRight(8.0F);
          b.add(filterTemplate.name()).growX().left();
       }, Styles.flatt, () -> {
