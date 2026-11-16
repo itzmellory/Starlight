@@ -1,6 +1,7 @@
 package starlight.utils;
 import arc.Core;
 import arc.files.Fi;
+import arc.graphics.Color;
 import arc.graphics.Pixmap;
 import arc.graphics.PixmapIO;
 import arc.graphics.g2d.Draw;
