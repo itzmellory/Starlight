@@ -1,5 +1,4 @@
 package starlight.utils;
-
 import arc.Events;
 import arc.scene.Element;
 import arc.scene.Group;
@@ -13,13 +12,11 @@ import mindustry.editor.MapEditorDialog;
 import mindustry.editor.MapResizeDialog;
 import mindustry.game.EventType.Trigger;
 import mindustry.ui.Styles;
-
 public class MapSizeUnlocker {
    public static void init() {
       unlockStaticBounds();
       Events.run(Trigger.update, MapSizeUnlocker::unlockDialogs);
    }
-
    private static void unlockStaticBounds() {
       for(Class<?> cls : new Class[]{MapEditorDialog.class, MapResizeDialog.class}) {
          for(String fName : new String[]{"minSize", "maxSize"}) {
@@ -30,9 +27,7 @@ public class MapSizeUnlocker {
             }
          }
       }
-
    }
-
    private static void unlockDialogs() {
       if (Vars.ui != null && Vars.ui.editor != null) {
          try {
@@ -48,7 +43,6 @@ public class MapSizeUnlocker {
                   } catch (Throwable var7) {
                   }
                }
-
                if (rd.isShown()) {
                   patchTextFields(rd.cont);
                }
@@ -56,9 +50,7 @@ public class MapSizeUnlocker {
          } catch (Throwable var8) {
          }
       }
-
    }
-
    private static void patchTextFields(Group root) {
       if (root != null) {
          for(Element child : root.getChildren()) {
@@ -88,30 +80,24 @@ public class MapSizeUnlocker {
             }
          }
       }
-
    }
-
    private static void setFinalStaticInt(Field field, int newValue) {
       try {
          field.setAccessible(true);
-
          try {
             Field modField = Field.class.getDeclaredField("modifiers");
             modField.setAccessible(true);
             modField.setInt(field, field.getModifiers() & -17);
          } catch (Throwable var4) {
          }
-
          try {
             Field accField = Field.class.getDeclaredField("accessFlags");
             accField.setAccessible(true);
             accField.setInt(field, field.getModifiers() & -17);
          } catch (Throwable var3) {
          }
-
          field.setInt((Object)null, newValue);
       } catch (Throwable var5) {
       }
-
    }
 }
