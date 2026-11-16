@@ -278,7 +278,6 @@ public class MapArtDialog {
       private static ArtStyle[] $values$() {
          return new ArtStyle[]{colored, terrain};
       }
-      // $FF: synthetic method
       private static ArtStyle[] $values$$() {
          return new ArtStyle[]{colored, terrain};
       }
@@ -293,7 +292,6 @@ public class MapArtDialog {
       private static LayerMode[] $values$() {
          return new LayerMode[]{floorOnly, wallOnly, floorAndWall};
       }
-      // $FF: synthetic method
       private static LayerMode[] $values$$() {
          return new LayerMode[]{floorOnly, wallOnly, floorAndWall};
       }
