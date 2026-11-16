@@ -10,6 +10,7 @@ import arc.scene.Element;
 import arc.scene.Group;
 import arc.scene.event.Touchable;
 import arc.scene.ui.ImageButton;
+import arc.scene.ui.ScrollPane;
 import arc.scene.ui.TextButton;
 import arc.scene.ui.layout.Table;
 import mindustry.Vars;
@@ -96,15 +97,16 @@ public class UpperUi {
       lastWidth = width;
       lastHeight = view.getHeight();
       Group parent = view.parent;
-      topBar = new Table();
+      topBar = new Table(Tex.pane);
+      topBar.margin(6.0F);
       topBar.setFillParent(false);
       topBar.setClip(true);
       topBar.top().left();
       topBar.touchable = Touchable.childrenOnly;
-      Table bar = new Table(Tex.button);
-      bar.margin(4.0F);
+      Table bar = new Table();
+      bar.margin(2.0F);
       bar.left();
-      bar.defaults().size(42.0F, 42.0F).pad(2.0F);
+      bar.defaults().size(44.0F, 44.0F).pad(3.0F);
       ImageButton copyBtn = (ImageButton)bar.button(Icon.copy, Styles.squareTogglei, () -> LandCopyPast.toggleMode(LandCopyPast.Mode.copy)).tooltip(Core.bundle.get("upper.copy", "Copy Terrain")).get();
       copyBtn.update(() -> copyBtn.setChecked(LandCopyPast.mode == LandCopyPast.Mode.copy));
       ImageButton cutBtn = (ImageButton)bar.button(Icon.trash, Styles.squareTogglei, () -> LandCopyPast.toggleMode(LandCopyPast.Mode.cut)).tooltip(Core.bundle.get("upper.cut", "Cut Terrain")).get();
@@ -134,9 +136,13 @@ public class UpperUi {
       bar.image(Tex.whiteui).width(2.0F).height(34.0F).padLeft(4.0F).padRight(4.0F);
       TextButton captureBtn = (TextButton)bar.button("\ue827", Styles.flatTogglet, MapScreenshotUtility::capture).tooltip(Core.bundle.get("upper.screenshot", "Map Screenshot")).size(42.0F, 42.0F).get();
       captureBtn.update(() -> captureBtn.setChecked(true));
-      topBar.add(bar).width(width).left();
+      bar.pack();
+      ScrollPane barScroll = new ScrollPane(bar, Styles.noBarPane);
+      barScroll.setScrollingDisabled(false, true);
+      barScroll.setFadeScrollBars(false);
+      topBar.add(barScroll).width(Math.max(1.0F, width - 12.0F)).height(bar.getPrefHeight() + 4.0F).left();
       topBar.pack();
       topBar.setSize(width, topBar.getPrefHeight());
       parent.addChild(topBar);
    }
-        }
+}
