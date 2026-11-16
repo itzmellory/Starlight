@@ -1,5 +1,4 @@
 package starlight.generation;
-import starlight.ui.ModFilterOptions;
 import arc.Core;
 import arc.math.Mathf;
 import arc.util.noise.Simplex;
@@ -7,6 +6,7 @@ import mindustry.content.Blocks;
 import mindustry.maps.filters.FilterOption;
 import mindustry.maps.filters.GenerateFilter;
 import mindustry.world.Block;
+import starlight.ui.ModFilterOptions;
 public class AdvancedTerrainFilter extends GenerateFilter {
    public Block floor;
    public Block wall;
