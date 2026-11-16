@@ -20,6 +20,7 @@ public class TerrainSchematicsDialog {
    public static void show() {
       BaseDialog d = new BaseDialog(Core.bundle.get("upper.schematics", "Terrain Schematics"));
       Table list = new Table();
+      list.margin(6.0F);
       String[] saveName = new String[]{"terrain_" + Time.millis() / 1000L};
       Runnable[] rebuild = new Runnable[1];
       rebuild[0] = () -> {
@@ -31,7 +32,7 @@ public class TerrainSchematicsDialog {
          }
          for(Fi f : files) {
             Table row = new Table(Tex.pane);
-            row.margin(6.0F);
+            row.margin(8.0F);
             row.add(f.nameWithoutExtension()).growX().left().padRight(10.0F);
             row.button(Icon.download, Styles.flati, () -> {
                LandCopyPast.Clip loaded = loadClip(f);
@@ -43,16 +44,16 @@ public class TerrainSchematicsDialog {
                   LandCopyPast.setMode(LandCopyPast.Mode.paste);
                   d.hide();
                }
-            }).size(40.0F).tooltip("Load into Paste");
+            }).size(44.0F).tooltip("Load into Paste");
             row.button(Icon.trash, Styles.flati, () -> {
                f.delete();
                rebuild[0].run();
-            }).size(40.0F).padLeft(4.0F).tooltip("Delete");
+            }).size(44.0F).padLeft(4.0F).tooltip("Delete");
             list.add(row).growX().width(380.0F).row();
          }
       };
       Table top = new Table();
-      top.defaults().pad(4.0F);
+      top.defaults().pad(6.0F);
       top.add(Core.bundle.get("upper.schemname", "Name:"));
       top.field(saveName[0], (s) -> saveName[0] = s).width(200.0F);
       top.button(Core.bundle.get("upper.schemsave", "Save Clipboard"), Icon.save, Styles.flatt, () -> {
@@ -69,7 +70,7 @@ public class TerrainSchematicsDialog {
       }).height(40.0F).disabled((b) -> LandCopyPast.clipboard == null);
       d.cont.add(top).row();
       rebuild[0].run();
-      d.cont.pane(list).size(420.0F, 340.0F).padTop(6.0F);
+      d.cont.pane(list).size(Math.min((float)Core.graphics.getWidth() * 0.9F, 520.0F), Math.min((float)Core.graphics.getHeight() * 0.65F, 420.0F)).padTop(8.0F);
       d.addCloseButton();
       d.show();
    }
