@@ -16,13 +16,11 @@ import arc.scene.ui.layout.Stack;
 import arc.scene.ui.layout.Table;
 import arc.struct.ObjectSet;
 import arc.struct.Seq;
-import arc.util.Log;
 import arc.util.Scaling;
 import arc.util.Strings;
-import java.lang.reflect.Method;
 import mindustry.Vars;
+import mindustry.ui.FileChooser;
 import mindustry.content.Blocks;
-import mindustry.core.Platform;
 import mindustry.gen.Icon;
 import mindustry.gen.Tex;
 import mindustry.ui.Styles;
@@ -46,16 +44,17 @@ public class MapArtDialog {
          initializedDefaults = true;
       }
       BaseDialog d = new BaseDialog(Core.bundle.get("editor.mapart.title", "Pixel Art Generator"));
-      Table main = new Table();
+      Table main = new Table(Tex.pane);
+      main.margin(10.0F);
       Runnable[] rebuild = new Runnable[1];
       rebuild[0] = () -> {
          main.clearChildren();
-         main.defaults().pad(4.0F).left();
+         main.defaults().pad(6.0F).left();
          if (previewRegion != null) {
             Table prevBox = new Table(Tex.pane);
             Image img = new Image(new TextureRegionDrawable(previewRegion));
             img.setScaling(Scaling.fit);
-            prevBox.add(img).size(160.0F, 160.0F).pad(4.0F);
+            prevBox.add(img).size(190.0F, 190.0F).pad(4.0F);
             main.add(prevBox).colspan(2).center().padBottom(6.0F).row();
          }
          main.add(Core.bundle.get("editor.mapart.width", "Width (1-3000):"));
@@ -66,38 +65,43 @@ public class MapArtDialog {
          fileLabel.setColor(selectedFile == null ? Color.lightGray : Color.lime);
          main.button(Core.bundle.get("editor.mapart.selectpng", "Choose PNG..."), Icon.fileImage, Styles.flatt, () -> pickPNG((file) -> Core.app.post(() -> {
                   selectedFile = file;
+                  Pixmap p = null;
                   try {
-                     Pixmap p = new Pixmap(file);
+                     p = new Pixmap(file);
                      artWidth = Math.min(800, p.width);
                      artHeight = Math.min(800, p.height);
+                     Texture nextTexture = new Texture(p);
                      if (previewTexture != null) {
                         previewTexture.dispose();
                      }
-                     previewTexture = new Texture(p);
+                     previewTexture = nextTexture;
                      previewRegion = new TextureRegion(previewTexture);
-                     p.dispose();
-                  } catch (Exception var3) {
+                  } catch (Exception error) {
+                     selectedFile = null;
+                     Vars.ui.showException("Unable to import PNG image", error);
+                  } finally {
+                     if (p != null) p.dispose();
                   }
                   rebuild[0].run();
-               }))).colspan(2).growX().height(42.0F).row();
+               }))).colspan(2).growX().height(48.0F).row();
          main.add(fileLabel).colspan(2).left().padBottom(6.0F).row();
          main.add(Core.bundle.get("editor.mapart.type", "Generation Type:")).left();
          main.button(style == MapArtDialog.ArtStyle.colored ? Core.bundle.get("editor.mapart.type.colored", "Colored Blocks") : Core.bundle.get("editor.mapart.type.terrain", "Vanilla Terrain"), Styles.flatt, () -> {
             style = style == MapArtDialog.ArtStyle.colored ? MapArtDialog.ArtStyle.terrain : MapArtDialog.ArtStyle.colored;
             rebuild[0].run();
-         }).width(190.0F).height(36.0F).row();
+         }).width(190.0F).height(42.0F).row();
          main.add(Core.bundle.get("editor.mapart.layers", "Layer Mode:")).left();
          main.button(getLayerModeName(layerMode), Styles.flatt, () -> {
             LayerMode[] vals = MapArtDialog.LayerMode.values();
             layerMode = vals[(layerMode.ordinal() + 1) % vals.length];
             rebuild[0].run();
-         }).width(190.0F).height(36.0F).row();
+         }).width(190.0F).height(42.0F).row();
          if (style == MapArtDialog.ArtStyle.terrain) {
             main.add(Core.bundle.get("editor.mapart.palette", "Block Palette:")).left();
             main.button(useAllBlocks ? Core.bundle.get("editor.mapart.palette.all", "All Blocks") : Core.bundle.get("editor.mapart.palette.custom", "Selected Only"), Styles.flatt, () -> {
                useAllBlocks = !useAllBlocks;
                rebuild[0].run();
-            }).width(190.0F).height(36.0F).row();
+            }).width(190.0F).height(42.0F).row();
             if (!useAllBlocks) {
                main.button(Core.bundle.get("editor.mapart.selectblocks", "Select Allowed Blocks") + " (" + allowedBlocks.size + ")", Icon.edit, Styles.flatt, () -> showBlockFilterDialog(rebuild[0])).colspan(2).growX().height(40.0F).row();
             }
@@ -119,83 +123,9 @@ public class MapArtDialog {
       d.show();
    }
    private static void pickPNG(Cons<Fi> cons) {
-      try {
-         Class<?> fc = null;
-         try {
-            fc = Class.forName("mindustry.ui.FileChooser");
-         } catch (Throwable var12) {
-         }
-         if (fc == null) {
-            try {
-               fc = Class.forName("mindustry.ui.dialogs.FileChooser");
-            } catch (Throwable var11) {
-            }
-         }
-         if (fc != null) {
-            Method openMethod = null;
-            for(Method m : fc.getMethods()) {
-               if (m.getName().equals("open") && m.getParameterCount() == 1) {
-                  openMethod = m;
-                  break;
-               }
-            }
-            if (openMethod != null) {
-               Class<?> paramType = openMethod.getParameterTypes()[0];
-               Object fci;
-               if (paramType == String.class) {
-                  fci = openMethod.invoke((Object)null, "png");
-               } else if (paramType == String[].class) {
-                  fci = openMethod.invoke((Object)null, new String[]{"png"});
-               } else {
-                  fci = null;
-               }
-               if (fci != null) {
-                  for(Method m : fci.getClass().getMethods()) {
-                     if (m.getName().equals("submit") && m.getParameterCount() == 1) {
-                        m.invoke(fci, cons);
-                        return;
-                     }
-                  }
-               }
-            }
-         }
-      } catch (Throwable t) {
-         Log.err("FileChooser reflection failed", t);
-      }
-      try {
-         Method best = null;
-         for(Method m : Platform.class.getMethods()) {
-            if (m.getName().equals("showFileChooser")) {
-               int pc = m.getParameterCount();
-               if (pc == 3 || pc == 4) {
-                  best = m;
-                  break;
-               }
-            }
-         }
-         if (best != null) {
-            int pc = best.getParameterCount();
-            if (pc == 3) {
-               best.invoke(Vars.platform, true, "png", cons);
-            } else {
-               best.invoke(Vars.platform, true, "Select PNG", "png", cons);
-            }
-            return;
-         }
-      } catch (Throwable t) {
-         Log.err("Platform file chooser failed", t);
-      }
-      try {
-         Method m = Platform.class.getMethod("showFileChooser", Boolean.TYPE, String.class, Cons.class);
-         m.invoke(Vars.platform, true, "png", cons);
-      } catch (Throwable var10) {
-         try {
-            Method m = Platform.class.getMethod("showFileChooser", Boolean.TYPE, String.class, String.class, Cons.class);
-            m.invoke(Vars.platform, true, "Select PNG", "png", cons);
-         } catch (Throwable var9) {
-            Core.app.post(() -> Vars.ui.showErrorMessage("File chooser is not available on this platform."));
-         }
-      }
+      FileChooser.open("png").title("Select PNG image").submit(file -> {
+         if (file != null) cons.get(file);
+      });
    }
    private static String getLayerModeName(LayerMode m) {
       switch (m) {
@@ -368,4 +298,4 @@ public class MapArtDialog {
          return new LayerMode[]{floorOnly, wallOnly, floorAndWall};
       }
    }
-                    }
+}
