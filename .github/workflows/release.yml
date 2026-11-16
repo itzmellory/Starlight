@@ -28,8 +28,7 @@ jobs:
       - name: Package assets
         run: |
           mkdir -p build/libs
-          cd assets
-          zip -r ../libs/Starlight-assets.zip .
+          zip -r build/libs/Starlight-assets.zip assets
       - id: version
         run: |
           git fetch --tags
@@ -44,9 +43,9 @@ jobs:
       - env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "${{ steps.version.outputs.version }}" 
-            build/libs/Starlight.jar 
-            build/libs/Starlight-assets.zip 
-            --target "${{ github.sha }}" 
-            --title "Starlight ${{ steps.version.outputs.version }}" 
+          gh release create "${{ steps.version.outputs.version }}" \
+            build/libs/Starlight.jar \
+            build/libs/Starlight-assets.zip \
+            --target "${{ github.sha }}" \
+            --title "Starlight ${{ steps.version.outputs.version }}" \
             --generate-notes
