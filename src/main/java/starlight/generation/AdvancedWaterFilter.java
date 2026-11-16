@@ -1,5 +1,4 @@
 package starlight.generation;
-import starlight.ui.ModFilterOptions;
 import arc.Core;
 import arc.util.noise.Simplex;
 import java.util.Arrays;
@@ -8,6 +7,7 @@ import mindustry.maps.filters.FilterOption;
 import mindustry.maps.filters.GenerateFilter;
 import mindustry.world.Block;
 import mindustry.world.blocks.environment.Floor;
+import starlight.ui.ModFilterOptions;
 public class AdvancedWaterFilter extends GenerateFilter {
    public float waterCoverage = 35.0F;
    public float waterScale = 90.0F;
@@ -286,7 +286,7 @@ public class AdvancedWaterFilter extends GenerateFilter {
       System.arraycopy(this.dilate(e, pw, ph), 0, w, 0, w.length);
    }
    private boolean[] dilate(boolean[] w, int pw, int ph) {
-      boolean[] r = w.clone();
+      boolean[] r = (boolean[])(([Z)w).clone();
       int[] dx = new int[]{1, -1, 0, 0};
       int[] dy = new int[]{0, 0, 1, -1};
       for(int y = 0; y < ph; ++y) {
@@ -307,7 +307,7 @@ public class AdvancedWaterFilter extends GenerateFilter {
       return r;
    }
    private boolean[] erode(boolean[] w, int pw, int ph) {
-      boolean[] r = w.clone();
+      boolean[] r = (boolean[])(([Z)w).clone();
       int[] dx = new int[]{1, -1, 0, 0};
       int[] dy = new int[]{0, 0, 1, -1};
       for(int y = 0; y < ph; ++y) {
@@ -328,7 +328,7 @@ public class AdvancedWaterFilter extends GenerateFilter {
       return r;
    }
    private void smooth(boolean[] w, int pw, int ph) {
-      boolean[] n = w.clone();
+      boolean[] n = (boolean[])(([Z)w).clone();
       for(int y = 0; y < ph; ++y) {
          for(int x = 0; x < pw; ++x) {
             int nb = 0;
@@ -356,7 +356,7 @@ public class AdvancedWaterFilter extends GenerateFilter {
    }
    private void prune(boolean[] w, int pw, int ph, boolean val, int mp) {
       for(int p = 0; p < mp; ++p) {
-         boolean[] n = w.clone();
+         boolean[] n = (boolean[])(([Z)w).clone();
          boolean ch = false;
          for(int y = 1; y + 1 < ph; ++y) {
             for(int x = 1; x + 1 < pw; ++x) {
@@ -518,4 +518,4 @@ public class AdvancedWaterFilter extends GenerateFilter {
          return this.w * 31 + this.h * 31 + this.s * 31 + this.cov;
       }
    }
-                  }
+            }
