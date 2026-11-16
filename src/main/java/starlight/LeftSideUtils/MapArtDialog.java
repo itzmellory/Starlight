@@ -46,22 +46,23 @@ public class MapArtDialog {
          initializedDefaults = true;
       }
       BaseDialog d = new BaseDialog(Core.bundle.get("editor.mapart.title", "Pixel Art Generator"));
-      Table main = new Table();
+      Table main = new Table(Tex.pane);
+      main.margin(12.0F);
       Runnable[] rebuild = new Runnable[1];
       rebuild[0] = () -> {
          main.clearChildren();
-         main.defaults().pad(4.0F).left();
+         main.defaults().pad(6.0F).left();
          if (previewRegion != null) {
             Table prevBox = new Table(Tex.pane);
             Image img = new Image(new TextureRegionDrawable(previewRegion));
             img.setScaling(Scaling.fit);
-            prevBox.add(img).size(160.0F, 160.0F).pad(4.0F);
+            prevBox.add(img).size(190.0F, 190.0F).pad(6.0F);
             main.add(prevBox).colspan(2).center().padBottom(6.0F).row();
          }
          main.add(Core.bundle.get("editor.mapart.width", "Width (1-3000):"));
-         main.field(String.valueOf(artWidth), TextFieldFilter.digitsOnly, (s) -> artWidth = Math.max(1, Math.min(3000, Strings.parseInt(s, artWidth)))).width(150.0F).row();
+         main.field(String.valueOf(artWidth), TextFieldFilter.digitsOnly, (s) -> artWidth = Math.max(1, Math.min(3000, Strings.parseInt(s, artWidth)))).width(180.0F).height(38.0F).row();
          main.add(Core.bundle.get("editor.mapart.height", "Height (1-3000):"));
-         main.field(String.valueOf(artHeight), TextFieldFilter.digitsOnly, (s) -> artHeight = Math.max(1, Math.min(3000, Strings.parseInt(s, artHeight)))).width(150.0F).row();
+         main.field(String.valueOf(artHeight), TextFieldFilter.digitsOnly, (s) -> artHeight = Math.max(1, Math.min(3000, Strings.parseInt(s, artHeight)))).width(180.0F).height(38.0F).row();
          Label fileLabel = new Label(selectedFile == null ? Core.bundle.get("editor.mapart.nofile", "No PNG selected") : selectedFile.name());
          fileLabel.setColor(selectedFile == null ? Color.lightGray : Color.lime);
          main.button(Core.bundle.get("editor.mapart.selectpng", "Choose PNG..."), Icon.fileImage, Styles.flatt, () -> pickPNG((file) -> Core.app.post(() -> {
@@ -79,25 +80,25 @@ public class MapArtDialog {
                   } catch (Exception var3) {
                   }
                   rebuild[0].run();
-               }))).colspan(2).growX().height(42.0F).row();
+               }))).colspan(2).growX().height(46.0F).row();
          main.add(fileLabel).colspan(2).left().padBottom(6.0F).row();
          main.add(Core.bundle.get("editor.mapart.type", "Generation Type:")).left();
          main.button(style == MapArtDialog.ArtStyle.colored ? Core.bundle.get("editor.mapart.type.colored", "Colored Blocks") : Core.bundle.get("editor.mapart.type.terrain", "Vanilla Terrain"), Styles.flatt, () -> {
             style = style == MapArtDialog.ArtStyle.colored ? MapArtDialog.ArtStyle.terrain : MapArtDialog.ArtStyle.colored;
             rebuild[0].run();
-         }).width(190.0F).height(36.0F).row();
+         }).width(210.0F).height(40.0F).row();
          main.add(Core.bundle.get("editor.mapart.layers", "Layer Mode:")).left();
          main.button(getLayerModeName(layerMode), Styles.flatt, () -> {
             LayerMode[] vals = MapArtDialog.LayerMode.values();
             layerMode = vals[(layerMode.ordinal() + 1) % vals.length];
             rebuild[0].run();
-         }).width(190.0F).height(36.0F).row();
+         }).width(210.0F).height(40.0F).row();
          if (style == MapArtDialog.ArtStyle.terrain) {
             main.add(Core.bundle.get("editor.mapart.palette", "Block Palette:")).left();
             main.button(useAllBlocks ? Core.bundle.get("editor.mapart.palette.all", "All Blocks") : Core.bundle.get("editor.mapart.palette.custom", "Selected Only"), Styles.flatt, () -> {
                useAllBlocks = !useAllBlocks;
                rebuild[0].run();
-            }).width(190.0F).height(36.0F).row();
+            }).width(210.0F).height(40.0F).row();
             if (!useAllBlocks) {
                main.button(Core.bundle.get("editor.mapart.selectblocks", "Select Allowed Blocks") + " (" + allowedBlocks.size + ")", Icon.edit, Styles.flatt, () -> showBlockFilterDialog(rebuild[0])).colspan(2).growX().height(40.0F).row();
             }
@@ -111,7 +112,7 @@ public class MapArtDialog {
                d.hide();
                Vars.ui.loadAnd(() -> MapArtGenerator.generate(selectedFile, artWidth, artHeight, style, layerMode, useAllBlocks, allowedBlocks));
             }
-         }).colspan(2).growX().height(46.0F).padTop(10.0F).row();
+         }).colspan(2).growX().height(50.0F).padTop(12.0F).row();
       };
       rebuild[0].run();
       d.cont.pane(main).maxHeight((float)Core.graphics.getHeight() * 0.82F);
@@ -231,6 +232,7 @@ public class MapArtDialog {
    private static void showBlockFilterDialog(Runnable onCloseUpdate) {
       BaseDialog bd = new BaseDialog(Core.bundle.get("editor.mapart.selectblocks", "Select Allowed Blocks"));
       Table grid = new Table();
+      grid.margin(8.0F);
       String[] search = new String[]{""};
       int[] tab = new int[]{0};
       Label countLabel = new Label("");
@@ -273,7 +275,7 @@ public class MapArtDialog {
       };
       bd.cont.add(countLabel).padBottom(4.0F).row();
       bd.cont.table((tabs) -> {
-         tabs.defaults().size(110.0F, 36.0F).pad(2.0F);
+         tabs.defaults().size(112.0F, 40.0F).pad(3.0F);
          tabs.button("All", Styles.flatTogglet, () -> {
             tab[0] = 0;
             rebuildGrid.run();
@@ -288,7 +290,7 @@ public class MapArtDialog {
          }).update((b) -> b.setChecked(tab[0] == 2));
       }).row();
       bd.cont.table((top) -> {
-         top.defaults().size(120.0F, 36.0F).pad(2.0F);
+         top.defaults().size(124.0F, 40.0F).pad(3.0F);
          top.button("Select All", Styles.flatt, () -> {
             for(Block b : Vars.content.blocks()) {
                if (isEligibleTerrainBlock(b) && (tab[0] != 1 || b.isFloor()) && (tab[0] != 2 || !b.isFloor())) {
@@ -324,7 +326,7 @@ public class MapArtDialog {
          rebuildGrid.run();
       }).width(340.0F).padBottom(6.0F).row();
       rebuildGrid.run();
-      bd.cont.pane(grid).size(Math.min((float)Core.graphics.getWidth() * 0.9F, 460.0F), Math.min((float)Core.graphics.getHeight() * 0.65F, 340.0F));
+      bd.cont.pane(grid).size(Math.min((float)Core.graphics.getWidth() * 0.92F, 520.0F), Math.min((float)Core.graphics.getHeight() * 0.68F, 420.0F));
       bd.hidden(onCloseUpdate);
       bd.addCloseButton();
       bd.show();
@@ -357,4 +359,4 @@ public class MapArtDialog {
          return new LayerMode[]{floorOnly, wallOnly, floorAndWall};
       }
    }
-                                                              }
+}
