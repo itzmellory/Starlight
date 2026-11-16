@@ -865,7 +865,7 @@ public class AdvancedRuinFilter extends GenerateFilter {
                row.add(rl).width(30.0F);
                row.button(Icon.trash, Styles.flati, () -> {
                   ArrayList<RuinStep> l = new ArrayList(Arrays.asList(this.f.steps));
-                  l.remove(idx);
+                  l.remove(removeIdx);
                   this.f.steps = (RuinStep[])l.toArray(new RuinStep[0]);
                   rebuild[0].run();
                   if (this.changed != null) {
