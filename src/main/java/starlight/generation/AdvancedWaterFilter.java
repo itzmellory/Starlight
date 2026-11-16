@@ -286,7 +286,7 @@ public class AdvancedWaterFilter extends GenerateFilter {
       System.arraycopy(this.dilate(e, pw, ph), 0, w, 0, w.length);
    }
    private boolean[] dilate(boolean[] w, int pw, int ph) {
-      boolean[] r = (boolean[])(([Z)w).clone();
+      boolean[] r = w.clone();
       int[] dx = new int[]{1, -1, 0, 0};
       int[] dy = new int[]{0, 0, 1, -1};
       for(int y = 0; y < ph; ++y) {
@@ -307,7 +307,7 @@ public class AdvancedWaterFilter extends GenerateFilter {
       return r;
    }
    private boolean[] erode(boolean[] w, int pw, int ph) {
-      boolean[] r = (boolean[])(([Z)w).clone();
+      boolean[] r = w.clone();
       int[] dx = new int[]{1, -1, 0, 0};
       int[] dy = new int[]{0, 0, 1, -1};
       for(int y = 0; y < ph; ++y) {
@@ -328,7 +328,7 @@ public class AdvancedWaterFilter extends GenerateFilter {
       return r;
    }
    private void smooth(boolean[] w, int pw, int ph) {
-      boolean[] n = (boolean[])(([Z)w).clone();
+      boolean[] n = w.clone();
       for(int y = 0; y < ph; ++y) {
          for(int x = 0; x < pw; ++x) {
             int nb = 0;
@@ -356,7 +356,7 @@ public class AdvancedWaterFilter extends GenerateFilter {
    }
    private void prune(boolean[] w, int pw, int ph, boolean val, int mp) {
       for(int p = 0; p < mp; ++p) {
-         boolean[] n = (boolean[])(([Z)w).clone();
+         boolean[] n = w.clone();
          boolean ch = false;
          for(int y = 1; y + 1 < ph; ++y) {
             for(int x = 1; x + 1 < pw; ++x) {
@@ -518,4 +518,4 @@ public class AdvancedWaterFilter extends GenerateFilter {
          return this.w * 31 + this.h * 31 + this.s * 31 + this.cov;
       }
    }
-            }
+}
