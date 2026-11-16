@@ -825,6 +825,7 @@ public class AdvancedRuinFilter extends GenerateFilter {
                this.f.steps = AdvancedRuinFilter.RuinStep.defaults();
             }
             for(int idx = 0; idx < this.f.steps.length; ++idx) {
+               int i = idx;
                RuinStep st = this.f.steps[idx];
                Table row = new Table(Tex.button);
                row.margin(6.0F);
