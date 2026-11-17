@@ -8,7 +8,7 @@ import arc.scene.ui.ImageButton;
 import arc.scene.ui.layout.Table;
 import arc.struct.ObjectSet;
 import arc.struct.Seq;
-import arc.util.Scl;
+import arc.scene.ui.layout.Scl;
 import mindustry.content.Planets;
 import mindustry.ctype.ContentType;
 import mindustry.ctype.UnlockableContent;
@@ -19,11 +19,11 @@ import mindustry.graphics.Pal;
 import mindustry.type.Planet;
 import mindustry.ui.Styles;
 import mindustry.world.Block;
-import mindustry.world.Category;
+import mindustry.type.Category;
 import mindustry.ui.dialogs.BaseDialog;
 import static arc.Core.settings;
 import static mindustry.Vars.*;
-public class BetterBannedContentDialog<T extends UnlockableContent> extends BannedContentDialog{
+public class BetterBannedContentDialog<T extends UnlockableContent> extends BannedContentDialog<T>{
     public boolean isRevealed;
     private final ContentType type;
     private Table selectedTable;
@@ -50,11 +50,14 @@ public class BetterBannedContentDialog<T extends UnlockableContent> extends Bann
         tabs = all.toSeq().sort();
         tabs.insert(0, Planets.sun);
     }
-    public void show(ObjectSet<T> set){
-        contentSet = set;
+    @Override
+    @SuppressWarnings("unchecked")
+    public void show(ObjectSet set){
+        contentSet = (ObjectSet<T>)set;
         super.show();
     }
-    private void build(){
+    @Override
+    public void build(){
         cont.clear();
         var header = cont.table(table -> {
             table.table(searchRow -> {
@@ -150,4 +153,4 @@ public class BetterBannedContentDialog<T extends UnlockableContent> extends Bann
             if(++index % columns == 0) table.row();
         }
     }
-                      }
+}
