@@ -88,9 +88,11 @@ public class PlanetBackgroundDialog extends BaseDialog{
         }).get().setDisabled(() -> rules.planetBackground == null);
         shown(this::build);
     }
-    public void show(){
+    @Override
+    public PlanetBackgroundDialog show(){
         zoom = rules.planetBackground == null ? 1f : rules.planetBackground.zoom;
         super.show();
+        return this;
     }
     private void build(){
         cont.clear();
