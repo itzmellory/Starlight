@@ -6,11 +6,9 @@ import arc.scene.event.EventListener;
 import arc.scene.event.VisibilityListener;
 import arc.struct.Seq;
 import arc.util.Reflect;
-import arc.util.DelayedRemovalSeq;
 import mindustry.Vars;
 import mindustry.editor.MapEditorDialog;
 import mindustry.ui.dialogs.CustomRulesDialog;
-import mindustry.ui.dialogs.MapInfoDialog;
 import mindustry.ui.dialogs.MapPlayDialog;
 import mindustry.game.EventType;
 import mindustry.mod.Mod;
@@ -38,14 +36,13 @@ public class MappingUtilities{
         initialized = true;
         addSettings();
         try{
-            CustomRulesDialog info = Reflect.get(MapInfoDialog.class, Reflect.get(Vars.ui.editor, "infoDialog"), "ruleInfo");
+            Object infoDialog = Reflect.get(Vars.ui.editor, "infoDialog");
+            CustomRulesDialog info = Reflect.get(infoDialog, "ruleInfo");
             CustomRulesDialog play = Reflect.get(MapPlayDialog.class, Reflect.get(Vars.ui.custom, "dialog"), "dialog");
             CustomRulesDialog playtest = Reflect.get(MapPlayDialog.class, Reflect.get(Vars.ui.editor, "playtestDialog"), "dialog");
-            CustomRulesDialog create = Reflect.get(MapInfoDialog.class, Reflect.get(MapEditorDialog.class, Vars.ui.editor, "infoDialog"), "ruleInfo");
             attach(info);
             attach(play);
             attach(playtest);
-            attach(create);
         }catch(Throwable error){
             arc.util.Log.err("Failed to initialize Mapping Utilities rules integration.", error);
         }
