@@ -163,8 +163,8 @@ public class RulesDialogMod{
                         Rules.TeamRule tr = rules.teams.get(Team.baseTeams[index[0]++]);
                         Table old = dialog.current;
                         dialog.current = (Table)Reflect.get(inner.get(), "table");
-                        dialog.check("@rules.cheat", tr.cheat, value -> tr.cheat = value);
-                        dialog.check("@rules.coresspawnships", tr.aiCoreSpawn, value -> tr.aiCoreSpawn = value);
+                        dialog.check("@rules.cheat", value -> tr.cheat = value, () -> tr.cheat);
+                        dialog.check("@rules.coresspawnships", value -> tr.aiCoreSpawn = value, () -> tr.aiCoreSpawn);
                         dialog.current = old;
                     }
                 });
@@ -221,4 +221,4 @@ public class RulesDialogMod{
         cell.get().setWrap(true);
         table.row();
     }
-          }
+}
