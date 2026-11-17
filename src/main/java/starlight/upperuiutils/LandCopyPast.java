@@ -427,8 +427,8 @@ public class LandCopyPast {
                   Point2 p = LandCopyPast.projectRaw(view, x, y);
                   if (!LandCopyPast.selecting || LandCopyPast.mode != LandCopyPast.Mode.copy && LandCopyPast.mode != LandCopyPast.Mode.cut) {
                      if (LandCopyPast.mode == LandCopyPast.Mode.paste && LandCopyPast.draggingPaste) {
-                        LandCopyPast.pasteOriginX = p.x - LandCopyPast.dragLastX;
-                        LandCopyPast.pasteOriginY = p.y - LandCopyPast.dragLastY;
+                        LandCopyPast.pasteOriginX += p.x - LandCopyPast.dragLastX;
+                        LandCopyPast.pasteOriginY += p.y - LandCopyPast.dragLastY;
                         LandCopyPast.dragLastX = p.x;
                         LandCopyPast.dragLastY = p.y;
                         event.cancel();
