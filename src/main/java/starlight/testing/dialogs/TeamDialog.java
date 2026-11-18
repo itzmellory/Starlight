@@ -39,7 +39,9 @@ public class TeamDialog extends BaseDialog{
                 String.valueOf(curTeam.id),
                 field -> {
                     if(Strings.canParsePositiveInt(field.getText())){
-                        changed.get(Team.get(Strings.parseInt(field.getText())));
+                        Team selected = Team.get(Strings.parseInt(field.getText()));
+                        curTeam = selected;
+                        changed.get(selected);
                     }
                 },
                 () -> String.valueOf(curTeam.id),
@@ -81,19 +83,27 @@ public class TeamDialog extends BaseDialog{
         });
     }
     void addButton(Table t, Team team, float size){
-        Image image = t.image().size(size).pad(3).color(team.color).get();
+        Table button = new Table();
+        button.background(mindustry.gen.Tex.whiteui);
+        button.setColor(team.color);
+        Label id = new Label(String.valueOf(team.id));
+        id.setColor(Color.black);
+        id.setFontScale(1f);
+        button.add(id).center();
+        t.add(button).size(size).pad(3);
         ClickListener listener = new ClickListener();
-        image.addListener(listener);
+        button.addListener(listener);
         if(!mobile){
-            image.addListener(new HandCursorListener());
+            button.addListener(new HandCursorListener());
             Color lerpColor = team.color.cpy().lerp(Color.white, 0.5f);
-            image.update(() -> image.color.lerp(!listener.isOver() ? team.color : lerpColor, Mathf.clamp(0.4f * Time.delta)));
+            button.update(() -> button.setColor(team.color.cpy().lerp(lerpColor, listener.isOver() ? Mathf.clamp(0.4f * Time.delta) : 0f)));
         }
-        image.clicked(() -> {
+        button.clicked(() -> {
+            curTeam = team;
             changed.get(team);
             hide();
         });
-        TUElements.boxTooltip(image, () -> teamName(team));
+        TUElements.boxTooltip(button, () -> teamName(team));
     }
     public String teamName(Team team){
         return bundle.has("team." + team.name + ".name") ? bundle.get("team." + team.name + ".name") : String.valueOf(team.id);
