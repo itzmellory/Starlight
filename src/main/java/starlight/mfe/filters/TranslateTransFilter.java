@@ -1,5 +1,6 @@
 package mfe.filters;
 import arc.func.Cons;
+import arc.math.geom.Vec2;
 import mindustry.maps.filters.FilterOption;
 import mindustry.maps.filters.GenerateFilter;
 public class TranslateTransFilter extends MI2UGenerateFilter {
@@ -17,7 +18,7 @@ public class TranslateTransFilter extends MI2UGenerateFilter {
             transeq.clear();
             transConsumer = null;
          }
-         transeq.addLast((Cons)(vec2) -> vec2.add(this.offX, this.offY));
+         transeq.addLast((Cons<Vec2>)(vec2) -> vec2.add(this.offX, this.offY));
       }
    }
 }
