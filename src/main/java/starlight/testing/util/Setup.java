@@ -7,7 +7,7 @@ import starlight.testing.ui.*;
 import static mindustry.Vars.*;
 public class Setup{
     static boolean selfInit;
-    static Table buttons = new Table().bottom().left();
+    static Table buttons = new Table().bottom().left().padBottom(88f);
     public static Table
     team = newTable(),
     death = newTable(),
@@ -35,6 +35,8 @@ public class Setup{
         SpawnMenu.add(units);
         add(units);
         buttons.visibility = Visibility.buttonVisibility;
+        buttons.setFillParent(true);
+        buttons.touchable = arc.scene.event.Touchable.childrenOnly;
         ui.hudGroup.addChild(buttons);
         Events.on(WorldLoadEvent.class, e -> {
             if(!selfInit){
