@@ -7,7 +7,7 @@ import starlight.testing.ui.*;
 import static mindustry.Vars.*;
 public class Setup{
     static boolean selfInit;
-    static Table buttons = new Table().bottom().left().padBottom(88f);
+    static Table buttons = new Table().bottom().left().marginBottom(88f);
     public static Table
     team = newTable(),
     death = newTable(),
