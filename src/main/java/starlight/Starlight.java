@@ -16,10 +16,6 @@ import starlight.upperuiutils.LandCopyPast;
 import starlight.utils.MapSizeUnlocker;
 public class Starlight extends Mod{
     public Starlight(){
-        if(!Vars.headless){
-            enableConsole = true;
-            experimental = true;
-        }
         Events.on(EventType.ClientLoadEvent.class, event -> {
             MapSizeUnlocker.init();
             GeneratorUI.init();
