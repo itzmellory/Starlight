@@ -322,7 +322,7 @@ public class SettingHandler {
                t.defaults().uniform().growX();
                int i = 0;
                for(String item : this.values) {
-                  Cell<Button> var10000 = t.button((String)this.textf.get(item), () -> {
+                  Cell<TextButton> var10000 = t.button((String)this.textf.get(item), () -> {
                      group.uncheckAll();
                      group.setChecked((String)this.textf.get(item));
                      Core.settings.put(this.name, item);
