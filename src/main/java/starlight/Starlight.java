@@ -5,7 +5,7 @@ import mindustry.Vars;
 import mindustry.game.EventType;
 import mindustry.mod.Mod;
 import starlight.LeftSideUtils.StencilManager;
-import starlight.mapping.MappingUtilities;
+import mfe.MapFilterExt;
 import starlight.testing.content.TUSettings;
 import starlight.testing.ui.TUStyles;
 import starlight.testing.util.Setup;
@@ -24,13 +24,13 @@ public class Starlight extends Mod{
             StencilManager.init();
             LandCopyPast.init();
             UpperUi.init();
-            MappingUtilities.init();
             Vars.renderer.minZoom = 0.667f;
             Vars.renderer.maxZoom = 24f;
             TUIcons.init();
             TUStyles.init();
             TUSettings.init();
             Setup.init();
+            MapFilterExt.init();
         });
     }
     public void loadContent(){
