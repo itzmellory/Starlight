@@ -26,7 +26,7 @@ public class TeamChanger{
         Cell<Button> i = t.button(b -> {
             TUElements.boxTooltip(b, "@tu-tooltip.button-team");
             b.setDisabled(() -> StarlightTesting.disableCampaign() || player.unit().type == UnitTypes.block);
-            b.label(TeamChanger::teamName);
+            b.label(() -> String.valueOf(curTeam().id));
         }, TUStyles.redButtonStyle, () -> {
             if(tTimer > TUVars.longPress) return;
             changeTeam(getNextTeam());
