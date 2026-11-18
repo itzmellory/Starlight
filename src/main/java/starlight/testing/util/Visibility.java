@@ -8,7 +8,7 @@ public class Visibility{
         if(control.input instanceof MobileInput m){
             return m.block == null &&
                 m.mode != PlaceMode.breaking &&
-                (m.selectRequests.isEmpty() || m.lastSchematic == null);
+                m.lastSchematic == null;
         }
         return true;
     };
