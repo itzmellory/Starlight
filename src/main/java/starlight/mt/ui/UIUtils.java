@@ -13,6 +13,6 @@ public class UIUtils {
       e.addListener(tool);
    }
    public static void tooltip(Element e, String text) {
-      tooltip(e, (Cons)((t) -> t.add(text)));
+      tooltip(e, (Cons<Table>)((t) -> t.add(text)));
    }
 }
