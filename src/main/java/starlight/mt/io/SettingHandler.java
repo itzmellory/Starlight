@@ -322,7 +322,7 @@ public class SettingHandler {
                t.defaults().uniform().growX();
                int i = 0;
                for(String item : this.values) {
-                  Cell var10000 = t.button((String)this.textf.get(item), () -> {
+                  Cell<Button> var10000 = t.button((String)this.textf.get(item), () -> {
                      group.uncheckAll();
                      group.setChecked((String)this.textf.get(item));
                      Core.settings.put(this.name, item);
@@ -330,8 +330,7 @@ public class SettingHandler {
                         this.changed.get(item);
                      }
                   }).with(MTStyles.funcSetTextb);
-                  Objects.requireNonNull(group);
-                  var10000.with((Button button) -> group.add(button));
+                  group.add(var10000.get());
                   ++i;
                   if (Mathf.mod(i, 4) == 0) {
                      t.row();
