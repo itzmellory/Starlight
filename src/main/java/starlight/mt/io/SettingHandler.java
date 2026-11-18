@@ -184,7 +184,7 @@ public class SettingHandler {
             if (this.reloadWorld) {
                t.add("[sky]RW[]");
             }
-         }).with((tb) -> UIUtils.tooltip(tb, (Cons)((tooltip) -> tooltip.table((t) -> {
+         }).with((tb) -> UIUtils.tooltip(tb, (Cons<Table>)((tooltip) -> tooltip.table((t) -> {
                   t.setBackground(Tex.buttonTrans);
                   t.label(() -> "[accent]" + this.title + "[]").growX().row();
                   t.label(() -> "[lightgray]" + this.name + "[]").growX().row();
@@ -331,7 +331,7 @@ public class SettingHandler {
                      }
                   }).with(MTStyles.funcSetTextb);
                   Objects.requireNonNull(group);
-                  var10000.with(group::add);
+                  var10000.with((Button button) -> group.add(button));
                   ++i;
                   if (Mathf.mod(i, 4) == 0) {
                      t.row();
@@ -384,4 +384,4 @@ public class SettingHandler {
          });
       }
    }
-            }
+}
