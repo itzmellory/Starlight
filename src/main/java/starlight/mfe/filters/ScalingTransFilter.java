@@ -1,5 +1,6 @@
 package mfe.filters;
 import arc.func.Cons;
+import arc.math.geom.Vec2;
 import mindustry.maps.filters.FilterOption;
 import mindustry.maps.filters.GenerateFilter;
 public class ScalingTransFilter extends MI2UGenerateFilter {
@@ -17,7 +18,7 @@ public class ScalingTransFilter extends MI2UGenerateFilter {
             transeq.clear();
             transConsumer = null;
          }
-         transeq.addLast((Cons)(vec2) -> vec2.scl(1.0F / this.sclX, 1.0F / this.sclY));
+         transeq.addLast((Cons<Vec2>)(vec2) -> vec2.scl(1.0F / this.sclX, 1.0F / this.sclY));
       }
    }
 }
