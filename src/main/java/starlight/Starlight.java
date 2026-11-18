@@ -5,6 +5,7 @@ import mindustry.Vars;
 import mindustry.game.EventType;
 import mindustry.mod.Mod;
 import starlight.LeftSideUtils.StencilManager;
+import starlight.mapping.MappingUtilities;
 import mfe.MapFilterExt;
 import starlight.testing.content.TUSettings;
 import starlight.testing.ui.TUStyles;
@@ -18,6 +19,7 @@ import starlight.utils.MapSizeUnlocker;
 public class Starlight extends Mod{
     public Starlight(){
         Events.on(EventType.ClientLoadEvent.class, event -> {
+            MappingUtilities.init();
             MapSizeUnlocker.init();
             GeneratorUI.init();
             LeftSideUi.init();
