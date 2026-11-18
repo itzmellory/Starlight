@@ -81,7 +81,7 @@ public class MapFilterExt extends Mod {
          }
       });
    };
-   public static void init() {
+   public static void initializeMFE() {
       initStyles();
       SettingHandler.registerJsonClass(BaseGuide.class, VanillaGridGuide.class, ExpressionGuide.class, CurveGuide.class);
       setting = new SettingHandler("MFE");
@@ -99,7 +99,6 @@ public class MapFilterExt extends Mod {
          }).size(200.0F, 50.0F);
       });
    }
-
    public static void addFilters() {
       addFilter(TranslateTransFilter::new);
       addFilter(ScalingTransFilter::new);
@@ -130,4 +129,4 @@ public class MapFilterExt extends Mod {
       uiCoordsysRect = new TextureRegionDrawable(Core.atlas.find("mapfilterext-ui-coordsys-rect"));
       uiCoordsysPolar = new TextureRegionDrawable(Core.atlas.find("mapfilterext-ui-coordsys-polar"));
    }
-                }
+}
