@@ -1,5 +1,6 @@
 package mfe.filters;
 import arc.func.Cons;
+import arc.math.geom.Vec2;
 import mindustry.maps.filters.FilterOption;
 import mindustry.maps.filters.GenerateFilter;
 public class RotateTransFilter extends MI2UGenerateFilter {
@@ -16,7 +17,7 @@ public class RotateTransFilter extends MI2UGenerateFilter {
             transeq.clear();
             transConsumer = null;
          }
-         transeq.addLast((Cons)(vec2) -> vec2.rotate(this.rotate));
+         transeq.addLast((Cons<Vec2>)(vec2) -> vec2.rotate(this.rotate));
       }
    }
 }
