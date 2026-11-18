@@ -1,6 +1,7 @@
 package mfe.filters;
 import arc.func.Cons;
 import arc.math.geom.Vec2;
+import arc.math.geom.Vec2;
 import mindustry.maps.filters.GenerateFilter;
 public class PolarTransFilter extends MI2UGenerateFilter {
    public static Vec2 tmp = new Vec2();
@@ -13,7 +14,7 @@ public class PolarTransFilter extends MI2UGenerateFilter {
             transeq.clear();
             transConsumer = null;
          }
-         transeq.addLast((Cons)(vec2) -> {
+         transeq.addLast((Cons<Vec2>)(vec2) -> {
             tmp.set(vec2);
             vec2.trns(tmp.x, tmp.y);
          });
