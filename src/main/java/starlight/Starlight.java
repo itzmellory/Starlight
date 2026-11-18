@@ -30,7 +30,7 @@ public class Starlight extends Mod{
             TUStyles.init();
             TUSettings.init();
             Setup.init();
-            MapFilterExt.init();
+            MapFilterExt.initializeMFE();
         });
     }
     public void loadContent(){
