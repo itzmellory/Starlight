@@ -4,7 +4,7 @@ import mindustry.input.*;
 import static mindustry.Vars.*;
 public class Visibility{
     public static Boolp mobileChecks = () -> {
-        if(player.unit().isBuilding()) return false;
+        if(player == null || player.unit() == null || player.unit().isBuilding()) return false;
         if(control.input instanceof MobileInput m){
             return m.block == null &&
                 m.mode != PlaceMode.breaking &&
