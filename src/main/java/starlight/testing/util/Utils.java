@@ -1,7 +1,5 @@
 package starlight.testing.util;
 import arc.util.*;
-import arc.util.async.*;
-import arc.graphics.g2d.TextureRegion;
 import arc.scene.style.TextureRegionDrawable;
 import mindustry.core.*;
 import mindustry.gen.*;
