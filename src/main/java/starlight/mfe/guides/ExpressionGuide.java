@@ -118,7 +118,7 @@ public class ExpressionGuide extends BaseGuide implements ExpressionHandler {
                if (Vars.editor.drawBlock.isOverlay()) {
                   tile.setOverlay(Vars.editor.drawBlock.asFloor());
                } else if (Vars.editor.drawBlock.isFloor()) {
-                  tile.setFloorUnder(Vars.editor.drawBlock.asFloor());
+                  tile.setFloor(Vars.editor.drawBlock.asFloor());
                } else if (!tile.block().isMultiblock() || Vars.editor.drawBlock.isMultiblock()) {
                   tile.setBlock(Vars.editor.drawBlock, Vars.editor.drawTeam, Vars.editor.rotation);
                }
@@ -339,4 +339,4 @@ public class ExpressionGuide extends BaseGuide implements ExpressionHandler {
          }
       });
    }
-      }
+   }
