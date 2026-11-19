@@ -113,6 +113,8 @@ public class UpperUi{
                 buttons.button(Icon.flipY, Styles.flati, LandCopyPast::flipY).tooltip(Core.bundle.get("upper.flipy", "Flip Y")).disabled(b -> LandCopyPast.clipboard == null);
                 buttons.button(Icon.save, Styles.flati, TerrainSchematicsDialog::show).tooltip(Core.bundle.get("upper.schematics", "Terrain schematics"));
                 buttons.button(Icon.settings, Styles.flati, LandCopyPast::showCopyPasteSettings).tooltip(Core.bundle.get("upper.settings", "Copy/paste options"));
+                ImageButton fillEraser = (ImageButton)buttons.button(Icon.eraser, Styles.squareTogglei, () -> LandCopyPast.terrainFillEraser = !LandCopyPast.terrainFillEraser).tooltip("Connected terrain eraser").get();
+                fillEraser.update(() -> fillEraser.setChecked(LandCopyPast.terrainFillEraser));
             });
         });
         content.table(Tex.button, group -> {
@@ -145,4 +147,4 @@ public class UpperUi{
         topBar.setSize(width, topBar.getPrefHeight());
         view.parent.addChild(topBar);
     }
-                       }
+}
