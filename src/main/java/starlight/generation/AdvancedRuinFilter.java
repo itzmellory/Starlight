@@ -1,4 +1,5 @@
 package starlight.generation;
+import starlight.ui.ModFilterOptions;
 import arc.struct.IntSeq;
 import arc.util.noise.Simplex;
 import mindustry.content.Blocks;
@@ -673,4 +674,4 @@ public class AdvancedRuinFilter extends GenerateFilter {
             return values[(ordinal() + 1) % values.length];
         }
     }
-       }
+            }
