@@ -11,55 +11,106 @@ hidden: true
 description:
     '''
     [[]#ffffff] Sta[[]][[]#e6e6e6]rlight[[]] [[]#b3b3b3]Hybrid Mapmaking Toolkit[[]] [[]]
+
     [[]#cccccc]A hybrid editor combining advanced map generators, terrain editing utilities, visual tools, and workflow features inspired by Map Filter Ext, Testing Utilities, and UpperUi.[[]]
+
     [[]#ffffff]Maps made with Starlight remain[[]] [[]#b3b3b3]compatible with the original game.[[]]
+
     [[]#ffffff] Fea[[]][[]#cccccc]tures[[]]:[[]]
+
     [[]#ffffff]- Adv[[]][[]#e6e6e6]anced[[]] [[]#808080]Generators[[]] [[]#666666] -[[]]
+
     [[]#b3b3b3]Procedural terrain tools with noise, octaves, falloff, tilt, and distortion controls; water generation with shallow-water, shoal, and depth-warp options; ruin scatter and structured ruins with rooms, corridors, and step controls; and block rotation tools.[[]]
+
     [[]#ffffff]- Ter[[]][[]#e6e6e6]rain[[]] [[]#808080]Editing and Clipboard[[]] [[]#666666] -[[]]
+
     [[]#b3b3b3]Select, copy, cut, paste, rotate, and flip terrain regions. Save and reuse terrain schemes, use rectangular or shaped brushes, edit cliffs, draw strict 45-degree lines, and work with terrain-focused erase and editing tools.[[]]
+
     [[]#ffffff]- Map[[]][[]#e6e6e6]Art[[]], [[]#808080]Stencils and Image Tools[[]] [[]#666666] -[[]]
+
     [[]#b3b3b3]Convert images into map terrain or colored-block structures. Place translucent reference stencils over the map to trace or recreate artwork with precision.[[]]
+
     [[]#ffffff]- Map[[]][[]#e6e6e6]Utilities[[]] and Editor Workflow[[]] [[]#666666] -[[]]
+
     [[]#b3b3b3]Additional map-editor utilities and workflow enhancements, including extended editing controls and tools adapted from the UpperUi and Testing Utilities concepts.[[]]
+
     [[]#ffffff]- Map[[]][[]#e6e6e6]Filter Tools[[]] [[]#666666] -[[]]
+
     [[]#b3b3b3]Filter and map inspection features based on the Map Filter Ext concept, integrated into the hybrid toolkit.[[]]
+
     [[]#ffffff]- Rem[[]][[]#e6e6e6]oved Size Limits[[]] [[]#666666] -[[]]
+
     [[]#b3b3b3]The built-in map-size unlocker removes standard minimum and maximum size restrictions when creating maps.[[]]
+
     [[]#ffffff]───────[[]][[]#e6e6e6]───────[[]][[]#b3b3b3]───  ───[[]][[]#808080]───────[[]][[]#4d4d4d]───────[[]]
+
     [[]#ffffff] Гиб[[]][[]#e6e6e6]ридный[[]] [[]#b3b3b3]Инструментарий Карт[[]] [[]]
+
     [[]#cccccc]Starlight объединяет генераторы карт, инструменты редактирования рельефа, визуальные утилиты и функции рабочего процесса. Вдохновлён и объединяет идеи Map Filter Ext, Testing Utilities и UpperUi.[[]]
+
     [[]#ffffff]Карты Starlight[[]] [[]#b3b3b3]совместимы с оригинальной игрой.[[]]
+
     [[]#ffffff] Возможности:[[]]
+
     [[]#ffffff]- Про[[]][[]#e6e6e6]двинутые генераторы[[]] [[]#808080] -[[]]
+
     [[]#b3b3b3]Процедурная генерация рельефа с настройками шума, октав, спада, наклона и искажения; генерация воды с мелководьем, отмелями и искривлением глубины; разброс руин и создание структур с комнатами, коридорами и настройкой шагов; инструменты вращения блоков.[[]]
+
     [[]#ffffff]- Ред[[]][[]#e6e6e6]актирование рельефа и буфер[[]] [[]#808080] -[[]]
+
     [[]#b3b3b3]Выделение, копирование, вырезание, вставка, поворот и отражение участков рельефа. Сохранение и повторное использование схем рельефа, прямоугольные и фигурные кисти, редактор скал, линии строго под 45 градусов и инструменты работы с рельефом.[[]]
+
     [[]#ffffff]- Кар[[]][[]#e6e6e6]тографический арт, трафареты и изображения[[]] [[]#808080] -[[]]
+
     [[]#b3b3b3]Преобразование изображений в рельеф карты или структуры из цветных блоков. Полупрозрачные трафареты поверх карты помогают точно переносить и обводить изображения.[[]]
+
     [[]#ffffff]- Ут[[]][[]#e6e6e6]илиты и улучшения редактора[[]] [[]#808080] -[[]]
+
     [[]#b3b3b3]Дополнительные инструменты и улучшения рабочего процесса редактора карт, включая функции на основе идей UpperUi и Testing Utilities.[[]]
+
     [[]#ffffff]- Фи[[]][[]#e6e6e6]льтры карты[[]] [[]#808080] -[[]]
+
     [[]#b3b3b3]Инструменты фильтрации и анализа карты на основе концепции Map Filter Ext, интегрированные в общий гибридный набор инструментов.[[]]
+
     [[]#ffffff]- Сня[[]][[]#e6e6e6]тие ограничений размера[[]] [[]#808080] -[[]]
+
     [[]#b3b3b3]Встроенный модуль разблокировки снимает стандартные ограничения минимального и максимального размера создаваемых карт.[[]]
+
     [[]#ffffff]───────[[]][[]#e6e6e6]───────[[]][[]#b3b3b3]───  ───[[]][[]#808080]───────[[]][[]#4d4d4d]───────[[]]
+
     [[]#ffffff] 高级[[]][[]#e6e6e6]地图编辑器[[]] [[]#b3b3b3]混合工具集[[]] [[]]
+
     [[]#cccccc]Starlight 是一款混合地图编辑工具，整合高级地图生成器、地形编辑、视觉工具与编辑流程功能。灵感及部分功能概念来自 Map Filter Ext、Testing Utilities 和 UpperUi。[[]]
+
     [[]#ffffff]使用 Starlight 创建的地图[[]] [[]#b3b3b3]与原版游戏兼容。[[]]
+
     [[]#ffffff] 功能介绍：[[]]
+
     [[]#ffffff]- 高级生成器[[]] [[]#808080] -[[]]
+
     [[]#b3b3b3]程序化地形生成，提供噪声、八度、衰减、倾斜和扭曲参数；水域生成支持浅水、浅滩和深度扭曲；废墟散布与带房间、走廊及步进参数的结构生成；方块旋转工具。[[]]
+
     [[]#ffffff]- 地形编辑与剪贴板[[]] [[]#808080] -[[]]
+
     [[]#b3b3b3]支持地形区域选择、复制、剪切、粘贴、旋转和翻转。可保存并复用地形方案，使用矩形及形状画笔、悬崖编辑器、严格45度直线和专用地形编辑工具。[[]]
+
     [[]#ffffff]- 地图绘图、模板与图像工具[[]] [[]#808080] -[[]]
+
     [[]#b3b3b3]将图像转换为地图地形或彩色方块结构，并通过半透明参考模板辅助精准绘制。[[]]
+
     [[]#ffffff]- 编辑器扩展工具[[]] [[]#808080] -[[]]
+
     [[]#b3b3b3]整合额外地图编辑工具与流程优化功能，包含基于 UpperUi 和 Testing Utilities 概念的扩展能力。[[]]
+
     [[]#ffffff]- 地图过滤工具[[]] [[]#808080] -[[]]
+
     [[]#b3b3b3]整合基于 Map Filter Ext 概念的地图过滤及检查功能，融入统一的混合工具集。[[]]
+
     [[]#ffffff]- 解除地图尺寸限制[[]] [[]#808080] -[[]]
+
     [[]#b3b3b3]内置解锁功能移除创建地图时的标准最小与最大尺寸限制。[[]]
+
     [[]#ffffff]───────[[]][[]#e6e6e6]───────[[]][[]#b3b3b3]───  ───[[]][[]#808080]───────[[]][[]#4d4d4d]───────[[]]
+
     [[]#ffffff]⚠ Glory to VI — Brothers and Sisters! [[]]
     '''
