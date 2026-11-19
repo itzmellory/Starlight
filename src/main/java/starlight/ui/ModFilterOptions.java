@@ -43,14 +43,14 @@ public class ModFilterOptions {
          this.step = st;
       }
       public void build(Table table) {
-         table.add("@filter.option." + this.name).growX().left().style(Styles.outlineLabel).padBottom(3.0F);
-         Label val = (Label)table.label(() -> Strings.autoFixed(this.getter.get(), 2)).right().style(Styles.outlineLabel).get();
+         table.add("@filter.option." + this.name).width(240.0F).wrap().left().style(Styles.outlineLabel).padBottom(3.0F);
+         Label val = (Label)table.label(() -> Strings.autoFixed(this.getter.get(), 2)).width(72.0F).right().style(Styles.outlineLabel).get();
          table.row();
          table.slider(this.min, this.max, this.step, this.getter.get(), (f) -> {
             this.setter.get(f);
             val.setText(Strings.autoFixed(f, 2));
             this.changed.run();
-         }).colspan(2).growX().height(34.0F).padBottom(6.0F).row();
+         }).colspan(2).width(312.0F).height(34.0F).padBottom(6.0F).row();
       }
    }
    public static class ToggleOption extends FilterOption {
@@ -102,7 +102,7 @@ public class ModFilterOptions {
             dialog.addCloseButton();
             dialog.show();
          }).pad(4.0F).margin(8.0F);
-         table.add("@filter.option." + this.name).left().growX().style(Styles.outlineLabel).padLeft(6.0F).row();
+         table.add("@filter.option." + this.name).width(240.0F).wrap().left().style(Styles.outlineLabel).padLeft(6.0F).row();
       }
    }
 }
