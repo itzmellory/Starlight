@@ -61,7 +61,7 @@ public class AdvancedWaterFilter extends GenerateFilter {
             case NaturalWaterGenerator.shallow -> validFloor(shallowFloor, Blocks.water);
             default -> validFloor(deepFloor, Blocks.deepwater);
         };
-        if (!input.block.synthetic()) input.block = Blocks.air;
+        if (!input.block.synthetic() && !input.block.isStatic()) input.block = Blocks.air;
         if (input.overlay != Blocks.spawn) input.overlay = Blocks.air;
     }
     private CacheEntry ensureCache(int width, int height) {
