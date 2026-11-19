@@ -322,7 +322,7 @@ public class AdvancedRuinFilter extends GenerateFilter {
         }
         if (!blockModified[index]) return;
         Block currentBlock = input.block == null ? Blocks.air : input.block;
-        if (currentBlock.synthetic()) return;
+        if (currentBlock.synthetic() || currentBlock.isStatic()) return;
         if (state.block == Blocks.air) {
             input.block = Blocks.air;
         } else if (state.block != null && !state.block.synthetic()) {
@@ -674,4 +674,4 @@ public class AdvancedRuinFilter extends GenerateFilter {
             return values[(ordinal() + 1) % values.length];
         }
     }
-            }
+        }
