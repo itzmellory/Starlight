@@ -1,4 +1,5 @@
 package starlight.generation;
+import starlight.ui.ModFilterOptions;
 import mindustry.Vars;
 import mindustry.content.Blocks;
 import mindustry.gen.Iconc;
@@ -196,4 +197,4 @@ public class AdvancedWaterFilter extends GenerateFilter {
             return result;
         }
     }
-       }
+}
